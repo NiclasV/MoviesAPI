@@ -2,7 +2,7 @@
 
 ### Overview
 
-##### This project is a playground for exploring React, TypeScript, styled-components and data fetching using The Movie Database API. It provides an opportunity to experiment with various aspects of modern web development.
+#### This project is a playground for exploring React, TypeScript, styled-components and data fetching using The Movie Database API. It provides an opportunity to experiment with various aspects of modern web development.
 
 
 ### Technologies Used
