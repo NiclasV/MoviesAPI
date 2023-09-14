@@ -99,7 +99,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
                     <p className="description">{movie.overview ? truncateString(movie.overview, 200) : ""}</p>
                     <Container 
                         justify="space-between" 
-                        alignItems="center" 
+                        alignitems="center" 
                         direction="row" 
                         padding="0px"
                         margin="15px 0 0 0"

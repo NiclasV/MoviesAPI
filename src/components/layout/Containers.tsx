@@ -4,7 +4,7 @@ interface baseContentProps {
     width?: string;
     direction?: "row" | "row-reverse" | "column" | "column-reverse";
     justify?: "center" | "start" | "end" | "flex-start" | "flex-end" | "left" | "right" | "space-between" | "space-around";
-    alignItems?: "center" | "start" | "end" | "flex-start" | "flex-end" | "left" | "right";
+    alignitems?: "center" | "start" | "end" | "flex-start" | "flex-end" | "left" | "right";
     padding?: string;
     margin?: string;
     bgColor?: string;
@@ -15,7 +15,7 @@ const baseContainer = styled.div<baseContentProps>`
     width: ${({ width }) => width};
     flex-direction: ${({ direction }) => direction ? direction : "column"};
     justify-content: ${({ justify }) => justify ? justify : "center"};
-    align-items: ${({ alignItems }) => alignItems ? alignItems : "center"};
+    align-items: ${({ alignitems }) => alignitems ? alignitems : "center"};
     margin: ${({ margin }) => margin};
     background-color:  ${({ bgColor }) => bgColor};
 `;

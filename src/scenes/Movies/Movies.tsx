@@ -3,16 +3,14 @@ import GetData from "../../data/GetData";
 import MovieNav from "./parts/MoviesNav";
 import MovieGrid from "./parts/MovieGrid";
 import { Pagination } from "./parts/Pagination";
-import { Button } from "../../components/elements/Button";
-import { Link } from "../../components/elements/Link";
-import { abort } from "process";
 import { useSearchParams } from "../../hooks/useSearchParams";
-
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Movies: React.FC = () => {
   const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
   const [data, setData] = useState();
   const abortControllerRef = useRef<AbortController | null>(null);
+  const { localGet, localSet } = useLocalStorage();
 
   const { params, fetchUrl, updateSearchParams } = useSearchParams({
     url: baseUrl,
@@ -24,6 +22,12 @@ const Movies: React.FC = () => {
       "sory_by": "popularity.desc",
     }),
   });
+
+  useEffect(() => {
+    localSet("hej", "hejaaa")
+
+    console.log(localGet("hej"))
+  }, [])
 
   useEffect(() => {
     const fetchData = async (url: string) => {
