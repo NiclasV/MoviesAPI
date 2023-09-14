@@ -9,14 +9,11 @@ import { Header } from './global/Header';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
 const App:React.FC = () => {
-  const { localGet, localSet } = useLocalStorage({ key: 'theme', value: 'light' }); 
-  const [currentTheme, setTheme ] = useState(localGet('theme') ? localGet('theme') : 'light')
-  const theme = localGet("theme"); // Retrieve the theme preference
+  const { localGet, localSet } = useLocalStorage(); 
+  const [ currentTheme, setTheme ] = useState(localGet('theme') ? localGet('theme') : 'light')
 
   const toggleNightmode = () => {
-    // Toggle the theme between 'light' and 'dark'
     setTheme(currentTheme === 'light' ? 'dark' : 'light')
-    //localSet("theme", theme === 'light' ? 'dark' : 'light');
   };
 
   useEffect(() => {
@@ -25,7 +22,7 @@ const App:React.FC = () => {
   }, [ currentTheme ])
 
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
       <div className="App">
         <Header />
         <Section variant="pStandard" justify="center">

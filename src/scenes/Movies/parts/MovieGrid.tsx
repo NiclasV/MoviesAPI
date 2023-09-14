@@ -22,7 +22,6 @@ const MovieGridStyled = styled.div<MovieGridProps>`
 
 const MovieGrid:React.FC<MovieGridProps> = ({ moviesData }) => {
     if (!moviesData) {
-        // Data is not available yet, render a loading state or placeholder
         return <p>Loading movies...</p>;
     } else {
         return (
