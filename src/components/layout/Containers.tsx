@@ -66,6 +66,5 @@ const sectionVariants = {
 
 export const Section = styled(baseContainer).attrs({ as: 'section' }) <SectionProps>`
     ${({ variant }) => variant && sectionVariants[variant] || `
-    
     `}
 `
