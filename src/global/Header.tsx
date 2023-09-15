@@ -6,6 +6,7 @@ interface HeaderProps {}
 const HeaderStyled = styled.div<HeaderProps>`
     display: flex;
     justify-content: center;
+    background-color: ${(props) => props.theme.background[100]}
 `;
 
 export const Header: React.FC<HeaderProps> = ({}) => {

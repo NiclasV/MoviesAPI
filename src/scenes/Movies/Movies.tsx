@@ -10,24 +10,31 @@ const Movies: React.FC = () => {
   const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
   const [data, setData] = useState();
   const abortControllerRef = useRef<AbortController | null>(null);
-  const { localGet, localSet } = useLocalStorage();
+
+  const generateInitParams = () => {
+    const sp = new URLSearchParams(window.location.search);
+    const includeAdult = sp.get('include_adult') || 'false';
+    const includeVideo = sp.get('include_video') || 'false';
+    const language = sp.get('language') || 'en-US';
+    const page = sp.get('page') || '1';
+    const sortBy = sp.get('sort_by') || 'popularity.desc';
+
+    // Now you can create a new URLSearchParams with the values or fallbacks
+    const initialSearchParams = new URLSearchParams({
+      "include_adult": includeAdult,
+      "include_video": includeVideo,
+      "language": language,
+      "page": page,
+      "sort_by": sortBy,
+    });
+
+    return initialSearchParams;
+  }
 
   const { params, fetchUrl, updateSearchParams } = useSearchParams({
     url: baseUrl,
-    searchParams: new URLSearchParams({
-      "include_adult": "false",
-      "include_video": "false",
-      "language": "en-US",
-      "page": "1",
-      "sory_by": "popularity.desc",
-    }),
+    searchParams: generateInitParams(),
   });
-
-  useEffect(() => {
-    localSet("hej", "hejaaa")
-
-    console.log(localGet("hej"))
-  }, [])
 
   useEffect(() => {
     const fetchData = async (url: string) => {

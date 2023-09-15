@@ -1,4 +1,3 @@
-const apiKey = process.env.REACT_APP_API_KEY;
 const bearerToken = process.env.REACT_APP_API_BEARER_TOKEN;
 
 const GetData = (url:string, custOptions?: {}): Promise<any> => {

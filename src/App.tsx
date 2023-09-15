@@ -28,7 +28,7 @@ const App:React.FC = () => {
         <Section variant="pStandard" justify="center">
           <Container variant="wide">
             <Global />
-            <Button variant="primary" onClick={toggleNightmode}>
+            <Button variant="outline" color="text" rounded="5px" onClick={toggleNightmode}>
               <span>ToggleNightMode</span>
             </Button>
             <Movies />

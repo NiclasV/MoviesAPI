@@ -21,10 +21,12 @@ const MovieItemStyled = styled.div<MovieItemProps>`
     .image {
         width: 100%;
         height: auto;
+        background-color: ${(props) => props.theme.background[400]};
 
         img {
             width: 100%;
             height: auto;
+            min-height: 360px;
             display: block;
         }
     }
@@ -92,7 +94,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
         return (
             <MovieItemStyled>
                 <div className="image">
-                    <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} />
+                    <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} />
                 </div>
                 <div className="text">
                     <h3><a href="">{movie.title}</a></h3>
