@@ -10,10 +10,10 @@ const typography: Theme = {
     fontSize: "36px",
   },
   h2: {
-    fontSize: "26px",
+    fontSize: "28 px",
   },
   h3: {
-    fontSize: "24px",
+    fontSize: "26px",
   },
   h4: {
     fontSize: "20px",

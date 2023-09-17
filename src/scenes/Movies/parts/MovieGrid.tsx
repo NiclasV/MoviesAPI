@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef }  from "react";
 import styled from "styled-components";
 import MovieItem from "./MovieItem";
 import { Movie } from "./MovieModel";
-import { Loader } from "../../../components/elements/Loader";
+import { Loader } from "../../../components/ui/elements/Loader";
 
 interface MoviesData {
     results?: Movie[];

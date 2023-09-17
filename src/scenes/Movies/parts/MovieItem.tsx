@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { Movie } from "./MovieModel";
-import { Container } from "../../../components/layout/Containers";
+import { Container } from "../../../components/ui/layout/Containers";
 
 interface MovieItemProps {
     children?: ReactNode | "",
@@ -21,13 +21,31 @@ const MovieItemStyled = styled.div<MovieItemProps>`
     .image {
         width: 100%;
         height: auto;
-        background-color: ${(props) => props.theme.background[400]};
+        background-color: ${(props) => props.theme.background[300]};
+        position: relative;
 
+        &:after {
+            content: "";
+            padding-top: 145%;
+            display: block;
+        }
         img {
             width: 100%;
-            height: auto;
-            min-height: 360px;
+            height: 100%;
             display: block;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .noImg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
     }
 
@@ -39,20 +57,21 @@ const MovieItemStyled = styled.div<MovieItemProps>`
         justify-content: flex-start;
         align-items: flex-start;
         border-top: 4px solid  ${(props) => props.theme.primary[500]};
+        width: 100%;
 
         h3 {
             color: ${(props) => props.theme.text[200]};
             margin-top: 0;
-            margin-bottom: 5px;
+            margin-bottom: 5    px;
             font-weight: 700;
-            line-height: 1.35;
+            line-height: 1.3;
         }
 
         p {
             margin: 0;
             
             &.description {
-                margin: 10px 0;
+                margin:5px 0;
                 flex: 1 1 0;
 
             }
@@ -67,13 +86,20 @@ const MovieItemStyled = styled.div<MovieItemProps>`
                 margin: 0;
                 line-height: 1;
                 padding: 8px 15px;
-                font-size: 16px;
                 display: inline-flex;
                 color: ${(props) => props.theme.text[900]};
                 border-radius: 25px;
                 background-color: ${(props) => props.theme.primary[500]};
                 text-align: Center;
                 align-self: flex-end;
+                display: inline-flex;   
+                align-items: flex-end;  
+                font-size: 14px;
+                strong {
+                    font-size: 20px;
+                    margin-right: 3px;
+                    font-weight: 800;
+                }
             }
         }
     }
@@ -94,7 +120,13 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
         return (
             <MovieItemStyled>
                 <div className="image">
-                    <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} />
+                    { movie.poster_path != null 
+                    ? 
+                    <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} /> 
+                    : 
+                    <div className="noImg"></div>
+                    }
+                    
                 </div>
                 <div className="text">
                     <h3><a href="">{movie.title}</a></h3>

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Movies from './scenes/Movies/Movies';
 import Global from './styles/global';
-import { Container , Section } from './components/layout/Containers';
-import { Button } from './components/elements/Button';
+import { Container , Section } from './components/ui/layout/Containers';
+import { Button } from './components/ui/elements/Button';
 import { ThemeProvider  } from 'styled-components';
 import { lightTheme, darkTheme } from './styles/theme';
 import { Header } from './global/Header';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { useThemeContext } from './context/ThemeContext';
 
 const App:React.FC = () => {
   const { localGet, localSet } = useLocalStorage(); 
   const [ currentTheme, setTheme ] = useState(localGet('theme') ? localGet('theme') : 'light')
+  const { themeMode, toggleTheme } = useThemeContext();
 
   const toggleNightmode = () => {
     setTheme(currentTheme === 'light' ? 'dark' : 'light')
@@ -22,15 +24,12 @@ const App:React.FC = () => {
   }, [ currentTheme ])
 
   return (
-    <ThemeProvider theme={currentTheme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       <div className="App">
         <Header />
         <Section variant="pStandard" justify="center">
           <Container variant="wide">
             <Global />
-            <Button variant="outline" color="text" rounded="5px" onClick={toggleNightmode}>
-              <span>ToggleNightMode</span>
-            </Button>
             <Movies />
           </Container>
         </Section>

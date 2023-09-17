@@ -35,6 +35,17 @@ export const useLocalStorage = ({key, value}: localStorageProps = {}) => {
         return val !== null ? val : null;
     }
 
+    const getLocalTheme = (key: "theme"): "light" | "dark" => {
+        var res = localStorage.getItem(key);
+        
+        if (res === "light" || res === "dark") { // Check if the value is "light" or "dark"
+            return res;
+        } else {
+            localStorage.setItem("theme", "light");
+            return "light";
+        }
+    }
+
     const removeLocalStorage = (key: string): void => {
         localStorage.removeItem(key)
     }
@@ -42,6 +53,7 @@ export const useLocalStorage = ({key, value}: localStorageProps = {}) => {
     return {
         localGet: getLocalStorage,
         localSet: setLocalStorage,
+        localGetTheme: getLocalTheme,
         localRemove: removeLocalStorage, 
         storedVal,
         setValue
