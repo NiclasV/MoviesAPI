@@ -21,7 +21,7 @@ const MovieGridStyled = styled.div<MovieGridProps>`
     row-gap: 15px;
 `
 
-const MovieGrid:React.FC<MovieGridProps> = ({ moviesData }) => {
+const MovieGrid = ({ moviesData }: MovieGridProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {

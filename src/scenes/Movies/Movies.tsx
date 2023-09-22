@@ -6,7 +6,7 @@ import { Pagination } from "./parts/Pagination";
 import { useSearchParams } from "../../hooks/useSearchParams";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
-const Movies: React.FC = () => {
+const Movies = () => {
   const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
   const [data, setData] = useState();
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -40,14 +40,13 @@ const Movies: React.FC = () => {
     const fetchData = async (url: string) => {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController(); 
-      console.log("fetch")
 
       try {
         const result = await GetData(url, {
           signal: abortControllerRef.current?.signal,
         });
         setData(result);
-      } catch (error) {
+      } catch (error) { 
         console.error('Error:', error);
       }
     };
@@ -58,18 +57,18 @@ const Movies: React.FC = () => {
 
   }, [fetchUrl])
 
-  const handlePageChange = (newPage: number) => {
+  const handleParamChange = (param: string, value: string | number) => {
     var sp = new URLSearchParams(params);
-    sp.set("page", String(newPage))
+    sp.set(param, String(value))
 
     updateSearchParams(sp);
   };
 
   return (
     <>
-      <MovieNav />
+      <MovieNav handleParamChange={handleParamChange} />
       <MovieGrid moviesData={data} />
-      <Pagination searchParams={params} onPageChange={handlePageChange}/>
+      <Pagination searchParams={params} handleParamChange={handleParamChange}/>
     </>
   );
 }

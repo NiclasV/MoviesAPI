@@ -40,6 +40,7 @@
 - ~~Add URLhandler to the use of searchParams to enable url-sharing which presets the initial fetch~~
 - ~~Add variant/color props to button-element for styling to theme-colors~~
 - Make each movie linkable for new page with more moviedata
+- Create some filtration possibilites targeting searchparams, sort-order etc
 
 #### License
 

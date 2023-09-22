@@ -114,7 +114,7 @@ function truncateString(input: string, maxLength: number): string {
     return input.slice(0, maxLength) + "...";
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
+const MovieItem = ({ movie }: MovieItemProps) => {
 
     if (movie) {
         return (
@@ -125,11 +125,10 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
                     <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} /> 
                     : 
                     <div className="noImg"></div>
-                    }
-                    
+                    }             
                 </div>
                 <div className="text">
-                    <h3><a href="">{movie.title}</a></h3>
+                    <h3><a href="">{movie.title ? truncateString(movie.title, 40) : ""}</a></h3>
                     <p className="description">{movie.overview ? truncateString(movie.overview, 200) : ""}</p>
                     <Container 
                         justify="space-between" 

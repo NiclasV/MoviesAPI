@@ -4,21 +4,21 @@ import { Container } from "../../../components/ui/layout/Containers";
 
 interface PaginationProps {
     searchParams?: URLSearchParams,
-    onPageChange: (newPage: number) => void; // Callback function to notify parent
+    handleParamChange: (key: string, value: string | number) => void; // Callback function to notify parent
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ searchParams, onPageChange }) => {
+export const Pagination = ({ searchParams, handleParamChange }: PaginationProps) => {
     var currentPage = searchParams?.get("page") ? parseInt(searchParams.get('page')!, 10) : 1;
 
     const nextPage = () => {
         const newPage = currentPage + 1;
-        onPageChange(newPage); // Notify parent component of the new page
+        handleParamChange("page", newPage); // Notify parent component of the new page
     };
 
     const prevPage = () => {
         const newPage = currentPage - 1;
         if (newPage > 0) {
-            onPageChange(newPage); // Notify parent component of the new page
+            handleParamChange("page", newPage); // Notify parent component of the new page
         }
         return
     };
