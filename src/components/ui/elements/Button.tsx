@@ -12,7 +12,7 @@ interface Button {
 }
 
 export const Button = styled.button<Button>`
-    padding: ${({ padding }) => padding ? padding : "10px 20px"};
+    padding: ${({ padding }) => padding ? padding : "6px 16px"};
     cursor: pointer;    
     text-decoration: none;
     color: ${(props) => props.theme.background[100]};

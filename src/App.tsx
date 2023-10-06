@@ -8,11 +8,12 @@ import { lightTheme, darkTheme } from './styles/theme';
 import { Header } from './global/Header';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useThemeContext } from './context/ThemeContext';
+import { MoviesProvider } from './context/MoviesParamsContext';
 
 const App:React.FC = () => {
   const { localGet, localSet } = useLocalStorage(); 
   const [ currentTheme, setTheme ] = useState(localGet('theme') ? localGet('theme') : 'light')
-  const { themeMode, toggleTheme } = useThemeContext();
+  const { themeMode } = useThemeContext();
 
   const toggleNightmode = () => {
     setTheme(currentTheme === 'light' ? 'dark' : 'light')
@@ -30,7 +31,9 @@ const App:React.FC = () => {
         <Section variant="pStandard" justify="center">
           <Container variant="wide">
             <Global />
-            <Movies />
+            <MoviesProvider>
+              <Movies />
+            </MoviesProvider>
           </Container>
         </Section>
       </div>

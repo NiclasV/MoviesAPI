@@ -20,7 +20,6 @@ const MovieItemStyled = styled.div<MovieItemProps>`
 
     .image {
         width: 100%;
-        height: auto;
         background-color: ${(props) => props.theme.background[300]};
         position: relative;
 
@@ -29,6 +28,7 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             padding-top: 145%;
             display: block;
         }
+
         img {
             width: 100%;
             height: 100%;
@@ -38,6 +38,8 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             position: absolute;
             left: 0;
             top: 0;
+            border-bottom: 4px solid  ${(props) => props.theme.primary[500]};
+            transition: all 0.35s;
         }
 
         .noImg {
@@ -47,23 +49,27 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             left: 0;
             top: 0;
         }
+
+        &:hover {
+            img {
+                filter: brightness(115%);
+            }
+        }
     }
 
     .text {
-        padding: 20px 20px 30px;
+        padding: 20px 20px 20px;
         display: flex;
         flex-direction: column;
         height: 100%;
         justify-content: flex-start;
         align-items: flex-start;
-        border-top: 4px solid  ${(props) => props.theme.primary[500]};
         width: 100%;
 
         h3 {
             color: ${(props) => props.theme.text[200]};
             margin-top: 0;
-            margin-bottom: 5    px;
-            font-weight: 700;
+            margin-bottom: 10px;
             line-height: 1.3;
         }
 
@@ -85,7 +91,7 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             &.rating {
                 margin: 0;
                 line-height: 1;
-                padding: 8px 15px;
+                padding: 10px 15px;
                 display: inline-flex;
                 color: ${(props) => props.theme.text[900]};
                 border-radius: 25px;
@@ -94,16 +100,11 @@ const MovieItemStyled = styled.div<MovieItemProps>`
                 align-self: flex-end;
                 display: inline-flex;   
                 align-items: flex-end;  
-                font-size: 14px;
-                strong {
-                    font-size: 20px;
-                    margin-right: 3px;
-                    font-weight: 800;
-                }
+          
+          
             }
         }
     }
-    
 `
 function truncateString(input: string, maxLength: number): string {
     if (input.length <= maxLength) {
@@ -138,7 +139,7 @@ const MovieItem = ({ movie }: MovieItemProps) => {
                         margin="15px 0 0 0"
                     >
                     <p className="date">{movie.release_date}</p>
-                    <p className="rating"><strong>{movie.vote_average}</strong>/10</p>
+                    <p className="rating"><strong>{movie.vote_average}</strong></p>
                     </Container>
                     
                 </div>

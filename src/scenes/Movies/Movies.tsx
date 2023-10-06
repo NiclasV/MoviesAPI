@@ -28,7 +28,8 @@ const Movies = () => {
       "sort_by": sortBy,
     });
 
-    return initialSearchParams;
+    //return initialSearchParams;
+    return new URLSearchParams()
   }
 
   const { params, fetchUrl, updateSearchParams } = useSearchParams({
@@ -66,7 +67,7 @@ const Movies = () => {
 
   return (
     <>
-      <MovieNav handleParamChange={handleParamChange} />
+      <MovieNav />
       <MovieGrid moviesData={data} />
       <Pagination searchParams={params} handleParamChange={handleParamChange}/>
     </>

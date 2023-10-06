@@ -26,25 +26,22 @@ export const Pagination = ({ searchParams, handleParamChange }: PaginationProps)
     return (
         <Container direction="row" justify="center" margin="40px 0">
             <Button onClick={prevPage}
-                padding="5px 15px"
                 variant="filled"
                 color="text"
-                rounded="10px"
+                rounded="5px"
                 size="md"
                 weight="700"
                 inactive={currentPage < 2 ? "true" : "false"}
-            >Prev</Button>
+            ><span>Prev</span></Button>
             <p style={{margin: "10px 20px", fontSize: "34px", fontWeight: "700"}}>{currentPage}</p>
             <Button
                 onClick={nextPage}
-                padding="5px 15px"
                 variant="filled"
                 color="text"
-                rounded="10px"
+                rounded="5px"
                 size="md"
                 weight="700"
-
-            >Next</Button>
+            ><span>Next</span></Button>
         </Container>
     );
 }

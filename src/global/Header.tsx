@@ -11,7 +11,8 @@ interface HeaderProps { }
 const HeaderStyled = styled.div<HeaderProps>`
     display: flex;
     justify-content: center;
-    background-color: ${(props) => props.theme.background[100]}
+    background-color: ${(props) => props.theme.background[100]};
+    border-bottom: 1px solid ${(props) => props.theme.background[300]}
 `;
 
 const MoonIcon = () => {
@@ -20,8 +21,8 @@ const MoonIcon = () => {
          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </SvgIcon>
    );
-
 }
+
 const SunIcon = () => {
    return (
       <SvgIcon viewBox="0 0 24 24" strokeWidth="2px">
@@ -41,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
    return (
       <HeaderStyled>
          <Container variant="wide" direction="row" justify="space-between">
-            <p>Header stuff</p>
+            <p>Movies'n'Stuff</p>
             <Button 
                variant="filled"
                color="primary" 

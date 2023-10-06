@@ -8,8 +8,8 @@ interface ThemeContextProps {
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>({themeMode: "light"}) 
 
-export const ThemeContextProvider: React.FC<React.PropsWithChildren>= ({ children }) => {
-    const { localGet, localSet, localGetTheme } = useLocalStorage(); 
+export const ThemeContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+    const { localSet, localGetTheme } = useLocalStorage(); 
 
     const [themeMode, setThemeMode] = useState<"light" | "dark">(localGetTheme('theme'));
 
