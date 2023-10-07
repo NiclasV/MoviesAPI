@@ -2,10 +2,9 @@ import React from "react";
 import { Container } from "../components/ui/layout/Containers";
 import styled from "styled-components";
 import { useThemeContext } from "../context/ThemeContext";
-import MoonSvg from "../assets/svg/moon.svg";
-import SunSvg from "../assets/svg/sun.svg";
 import { Button } from "../components/ui/elements/Button";
 import SvgIcon from "../components/ui/elements/SvgIcon";
+import { Link } from "react-router-dom";
 interface HeaderProps { }
 
 const HeaderStyled = styled.div<HeaderProps>`
@@ -42,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
    return (
       <HeaderStyled>
          <Container variant="wide" direction="row" justify="space-between">
-            <p>Movies'n'Stuff</p>
+            <Link to={"/"}><p>Movies'n'Stuff</p></Link>
             <Button 
                variant="filled"
                color="primary" 

@@ -2,8 +2,9 @@ import React, { PropsWithChildren, createContext, useContext, useEffect, useMemo
 
 // Define the initial context value
 interface MoviesContextType {
-  searchParams: Record<string, any>;
-  updateSearchParams: (newParams: Record<string, any>) => void;
+  searchParams: URLSearchParams;
+  updateSearchParams: (newParams: URLSearchParams) => void;
+  fetchUrl: string;
 }
 
 const MoviesParamsContext = createContext<MoviesContextType | undefined>(undefined);
@@ -18,40 +19,43 @@ export const useMoviesContext = () => {
 };
 
 export const MoviesProvider = ({ children }: PropsWithChildren) => {
-  const [searchParams, setSearchParams] = useState<Record<string, any>>({});
+  const initParams = new URLSearchParams(window.location.search);
+
+  if(!initParams.get("page")) {
+    initParams.set("page", "1")
+  }
+
+  const [searchParams, setSearchParams] = useState<URLSearchParams>(initParams);
   const [fetchUrl, setFetchUrl] = useState("");
   const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
 
-  // Memoize the searchParams object to prevent unnecessary re-creation
-  const memoizedSearchParams = useMemo(() => searchParams, [searchParams]);
-
-  const updateSearchParams = (newParams: Record<string, any>) => {
-    setSearchParams({ ...searchParams, ...newParams });
+  const updateSearchParams = (newParams: URLSearchParams) => {
+    setSearchParams(newParams);
   };
 
-      // useEffect for updating fetchUrl when params change
-    // also setting the url based on the new params
-    useEffect(() => {
-      const generateFetchUrl = () => {
-          var lp = new URLSearchParams(searchParams)
-          const newurl = baseUrl + lp.toString();
-          setFetchUrl(newurl);
-      };
-
-      const setHistoryUrl = () => {
+  // useEffect for updating fetchUrl when params change
+  // also setting the url based on the new params
+  useEffect(() => {
+    const generateFetchUrl = () => {
         var lp = new URLSearchParams(searchParams)
-          var currentUrl = window.location.pathname + "?" + lp.toString();
-          window.history.pushState("state", "str", currentUrl);
-      }
+        const newurl = baseUrl + lp.toString();
+        setFetchUrl(newurl);
+    };
 
-      generateFetchUrl(); 
-      setHistoryUrl();
+    const setHistoryUrl = () => {
+      var lp = new URLSearchParams(searchParams)
+        var currentUrl = window.location.pathname + "?" + lp.toString();
+        window.history.pushState("state", "str", currentUrl);
+    }
+
+    generateFetchUrl(); 
+    setHistoryUrl();
 
   }, [searchParams]);
 
 
   return (
-    <MoviesParamsContext.Provider value={{ searchParams: memoizedSearchParams, updateSearchParams }}>
+    <MoviesParamsContext.Provider value={{ searchParams, updateSearchParams, fetchUrl}}>
       {children}
     </MoviesParamsContext.Provider>
   );

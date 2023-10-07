@@ -10,7 +10,7 @@ interface MoviesData {
 
 interface MovieGridProps {
     children?: ReactNode,
-    moviesData?: MoviesData,
+    moviesData?: MoviesData | null,
 }
 
 const MovieGridStyled = styled.div<MovieGridProps>`

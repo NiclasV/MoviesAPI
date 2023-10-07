@@ -54,13 +54,13 @@ const sectionVariants = {
         margin: 80px 0;
     `,
     mSmall: `
-        margin: 60px 0;
+        margin: 5   0px 0;
     `,
     pStandard: `
         padding: 80px 0;
     `,
     pSmall: `
-        padding: 60px 0;
+        padding: 50px 0;
     `,
 };
 

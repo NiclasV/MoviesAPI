@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { Movie } from "./MovieModel";
 import { Container } from "../../../components/ui/layout/Containers";
+import { Link } from "react-router-dom";
 
 interface MovieItemProps {
     children?: ReactNode | "",
@@ -129,8 +130,8 @@ const MovieItem = ({ movie }: MovieItemProps) => {
                     }             
                 </div>
                 <div className="text">
-                    <h3><a href="">{movie.title ? truncateString(movie.title, 40) : ""}</a></h3>
-                    <p className="description">{movie.overview ? truncateString(movie.overview, 200) : ""}</p>
+                    <h3><Link to={`/movie/${movie.id}`}>{movie.title ? truncateString(movie.title, 40) : ""}</Link></h3>
+                    <p className="description">{movie.overview ? truncateString(movie.overview, 140) : ""}</p>
                     <Container 
                         justify="space-between" 
                         alignitems="center" 

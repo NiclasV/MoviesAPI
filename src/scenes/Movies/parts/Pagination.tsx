@@ -1,24 +1,30 @@
 import React from "react";
 import { Button } from "../../../components/ui/elements/Button";
 import { Container } from "../../../components/ui/layout/Containers";
+import { useMoviesContext } from "../../../context/MoviesParamsContext";
 
-interface PaginationProps {
-    searchParams?: URLSearchParams,
-    handleParamChange: (key: string, value: string | number) => void; // Callback function to notify parent
-}
 
-export const Pagination = ({ searchParams, handleParamChange }: PaginationProps) => {
-    var currentPage = searchParams?.get("page") ? parseInt(searchParams.get('page')!, 10) : 1;
 
+export const Pagination = () => {
+    const { searchParams, updateSearchParams } = useMoviesContext();  
+    const pageParam = searchParams?.get("page");
+    const currentPage = pageParam ? parseInt(pageParam) : 1;
+    
     const nextPage = () => {
-        const newPage = currentPage + 1;
-        handleParamChange("page", newPage); // Notify parent component of the new page
+        var newPage = currentPage + 1;
+        const newParams = new URLSearchParams(searchParams);
+
+        newParams.set("page", String(newPage))
+        updateSearchParams(newParams)
+
     };
 
     const prevPage = () => {
-        const newPage = currentPage - 1;
+        var newPage = currentPage - 1;
+        const newParams = new URLSearchParams(searchParams);
         if (newPage > 0) {
-            handleParamChange("page", newPage); // Notify parent component of the new page
+            newParams.set("page", String(newPage))
+            updateSearchParams(newParams)
         }
         return
     };
