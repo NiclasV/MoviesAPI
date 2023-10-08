@@ -1,5 +1,5 @@
 import { useMovieContext } from "../../context/MovieContext";
-import { Section, Container } from "../../components/layout/Containers";
+import { Section, Container } from "../../components/ui/layout/Containers";
 import styled from "styled-components";
 import { Button } from "../../components/ui/elements/Button";
 import { Link } from "react-router-dom";

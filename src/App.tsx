@@ -18,11 +18,10 @@ const App: React.FC = () => {
   const [currentTheme] = useState(localGet('theme') ? localGet('theme') : 'light')
   const { themeMode } = useThemeContext();
 
-
   useEffect(() => {
     localSet("theme", currentTheme ? currentTheme : "light")
 
-  }, [currentTheme])
+  }, [currentTheme, localSet])
 
   return (
     <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>

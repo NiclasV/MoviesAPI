@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { MovieFull } from '../models/MovieModel';
@@ -23,7 +23,6 @@ export const useMovieContext = () => {
 
 export const MovieProvider = ({ children }: PropsWithChildren) => {
     const [movie, setMovie] = useState<MovieFull | null>(null);
-    const [movies, setMovies ] = useState();
     const { id } = useParams();
     const baseUrl = "https://api.themoviedb.org/3/movie/";
     const fetchUrl = baseUrl + id;
@@ -37,14 +36,8 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
       }
     }, [data]);
 
-    useEffect(() => {
-        if(movie) {
-            console.log(movie?.genres)
-        }
-    }, [movie])
-  
     return (
-        <MovieContext.Provider value={{ movie, movies }}>
+        <MovieContext.Provider value={{ movie }}>
             {children}
         </MovieContext.Provider>
     );

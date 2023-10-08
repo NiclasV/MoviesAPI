@@ -20,8 +20,14 @@ export const Pagination = () => {
     };
 
     const prevPage = () => {
+
+        if (currentPage === 1) {
+            return
+        }
+        
         var newPage = currentPage - 1;
         const newParams = new URLSearchParams(searchParams);
+
         if (newPage > 0) {
             newParams.set("page", String(newPage))
             updateSearchParams(newParams)

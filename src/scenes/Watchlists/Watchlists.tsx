@@ -1,4 +1,4 @@
-import { Container, Section } from "../../components/layout/Containers";
+import { Container, Section } from "../../components/ui/layout/Containers";
 
 export const Watchlists = () => {
     return (
