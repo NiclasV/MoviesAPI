@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Button } from "../../components/ui/elements/Button";
 import { Link } from "react-router-dom";
 import { MovieSlider } from "../../components/MovieSlider";
+import { Loader } from "../../components/ui/elements/Loader";
 
 const MovieCardStyled = styled.div`
   background-color: ${props => props.theme.background[100]};
@@ -54,11 +55,15 @@ const MovieCardStyled = styled.div`
   }
   .date {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     color: ${props => props.theme.text[200]}
   }
   .genres {
     display: flex;
+
+    a {
+      text-decoration: none;
+    }
 
     p {
       font-size: 12px;
@@ -80,7 +85,7 @@ const MovieCardStyled = styled.div`
     display: inline-flex;
     color: ${(props) => props.theme.text[900]};
     border-radius: 25px;
-    font-size: 20px;
+    font-size: 18px;
     background-color: ${(props) => props.theme.primary[500]};
     text-align: Center;
     align-self: flex-end;
@@ -88,9 +93,11 @@ const MovieCardStyled = styled.div`
     align-items: flex-end;  
 
     strong {
-      margin-right: 3px;
+      font-size:24px;
+      margin-right: 2px;
     }
   }
+
   img {
     max-width: 100%;
     border-right: 5px solid ${props => props.theme.primary[500]};
@@ -127,12 +134,12 @@ export const Movie = () => {
               </div>
               <div className="bottom">
                 <p className="date">{movie.release_date}</p>
-                <p className="rating"><strong>{movie.vote_average ? Math.round(movie.vote_average) : ""}</strong> /10</p>
+                <p className="rating"><strong>{movie.vote_average ? Math.round(movie.vote_average) : ""}</strong>/10</p>
               </div>
             </div>
           </MovieCardStyled>
         ) : (
-          <p>Loading...</p>
+          <Loader/>
         )}
       </Container>
       <MovieSlider/>

@@ -12,8 +12,8 @@ const LoadWrapper = styled.div`
 `;
 
 const LoaderEl= styled.div<LoaderProps>`
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   position: relative;
   animation: rotate 1s linear infinite;
@@ -24,8 +24,8 @@ const LoaderEl= styled.div<LoaderProps>`
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 8px solid ${(props) => props.theme.background[100]};
-    animation: prixClipFix 1.65 s linear infinite ;
+    border: 12px solid transparent;
+    animation: prixClipFix 1.65s linear infinite ;
   }
   &:after{
     transform: rotate3d(90, 90, 0, 180deg );
