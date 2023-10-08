@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { Movie } from "./MovieModel";
-import { Container } from "../../../components/ui/layout/Containers";
+import { Movie } from "../models/MovieModel";
+import { Container } from "./ui/layout/Containers";
 import { Link } from "react-router-dom";
 
 interface MovieItemProps {
@@ -101,8 +101,6 @@ const MovieItemStyled = styled.div<MovieItemProps>`
                 align-self: flex-end;
                 display: inline-flex;   
                 align-items: flex-end;  
-          
-          
             }
         }
     }
@@ -122,27 +120,31 @@ const MovieItem = ({ movie }: MovieItemProps) => {
         return (
             <MovieItemStyled>
                 <div className="image">
-                    { movie.poster_path != null 
-                    ? 
-                    <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} /> 
-                    : 
-                    <div className="noImg"></div>
-                    }             
+                    <Link to={`/movie/${movie.id}`}>
+
+                        {movie.poster_path != null
+                            ?
+                            <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} />
+                            :
+                            <div className="noImg"></div>
+                        }
+
+                    </Link>
                 </div>
                 <div className="text">
                     <h3><Link to={`/movie/${movie.id}`}>{movie.title ? truncateString(movie.title, 40) : ""}</Link></h3>
                     <p className="description">{movie.overview ? truncateString(movie.overview, 140) : ""}</p>
-                    <Container 
-                        justify="space-between" 
-                        alignitems="center" 
-                        direction="row" 
+                    <Container
+                        justify="space-between"
+                        alignitems="center"
+                        direction="row"
                         padding="0px"
                         margin="15px 0 0 0"
                     >
-                    <p className="date">{movie.release_date}</p>
-                    <p className="rating"><strong>{movie.vote_average}</strong></p>
+                        <p className="date">{movie.release_date}</p>
+                        <p className="rating"><strong>{movie.vote_average}</strong></p>
                     </Container>
-                    
+
                 </div>
             </MovieItemStyled>
         );

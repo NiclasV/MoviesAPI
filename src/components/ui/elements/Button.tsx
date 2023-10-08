@@ -105,12 +105,13 @@ export const Button = styled.button<Button>`
                 ${borderRadius ? borderRadius : ""};
             `;
         } else {
-            return ``;
+            return `
+                color: ${buttonColor};
+            `;
         }
     }};
 
     &:hover {
         filter: brightness(110%);
-        
     }
 `;

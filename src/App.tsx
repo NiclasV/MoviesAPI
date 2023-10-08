@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Movies from './scenes/Movies/Movies';
 import Global from './styles/global';
-import { Container, Section } from './components/ui/layout/Containers';
-import { Button } from './components/ui/elements/Button';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './styles/theme';
 import { Header } from './global/Header';
@@ -12,6 +10,8 @@ import { MoviesProvider } from './context/MoviesParamsContext';
 import { Movie } from './scenes/Movie/Movie';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MovieProvider } from './context/MovieContext';
+import { WatchListProvider } from './context/WatchListContext';
+import { Watchlists } from './scenes/Watchlists/Watchlists';
 
 const App: React.FC = () => {
   const { localGet, localSet } = useLocalStorage();
@@ -27,22 +27,27 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       <div className="App">
-      <Router>
-        <Header />
-          <Global />
+        <WatchListProvider>
+          <Router>
+            <Header />
+            <Global />
             <Routes>
               <Route path="/" element={
                 <MoviesProvider>
                   <Movies />
                 </MoviesProvider>
-              } />                  
+              } />
               <Route path="/movie/:id" element={
                 <MovieProvider>
                   <Movie />
                 </MovieProvider>
               } />
+              <Route path="/watchlists" element={
+                <Watchlists />
+              }></Route>
             </Routes>
           </Router>
+        </WatchListProvider>
       </div>
     </ThemeProvider>
   );

@@ -42,15 +42,19 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
       <HeaderStyled>
          <Container variant="wide" direction="row" justify="space-between">
             <Link to={"/"}><p>Movies'n'Stuff</p></Link>
-            <Button 
-               variant="filled"
-               color="primary" 
-               padding="5px"
-               rounded="true"
-               onClick={toggleTheme}
-               >
-               {themeMode === "light" ? <MoonIcon/> : <SunIcon/>}
-            </Button>
+            <Container padding="0" direction="row" justify="flex-end" align-items="center">
+               <Link to={"/watchlists"}><p style={{marginRight: "20px"}}>Watchlists</p></Link>
+               <Button 
+                  variant="filled"
+                  color="primary" 
+                  padding="5px"
+                  rounded="true"
+                  onClick={toggleTheme}
+                  >
+                  {themeMode === "light" ? <MoonIcon/> : <SunIcon/>}
+               </Button>
+            </Container>
+  
          </Container>
       </HeaderStyled>
    );

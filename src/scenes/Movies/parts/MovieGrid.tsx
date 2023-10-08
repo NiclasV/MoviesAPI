@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useRef }  from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
-import MovieItem from "./MovieItem";
-import { Movie } from "./MovieModel";
+import MovieItem from "../../../components/MovieItem";
+import { Movie } from "../../../models/MovieModel";
 import { Loader } from "../../../components/ui/elements/Loader";
 
 interface MoviesData {
