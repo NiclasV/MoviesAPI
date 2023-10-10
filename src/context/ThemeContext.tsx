@@ -20,7 +20,7 @@ export const ThemeContextProvider: React.FC<React.PropsWithChildren> = ({ childr
     useEffect(() => {
         localSet("theme", themeMode ? themeMode : "light")
         
-      }, [ themeMode ])
+      }, [ themeMode, localSet])
     
     return (
       <ThemeContext.Provider value={{ themeMode, toggleTheme }}>

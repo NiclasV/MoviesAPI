@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../../../components/ui/elements/Button";
-import { Container } from "../../../components/ui/layout/Containers";
+import { Container } from "../../../components/layout/Containers";
 import { useMoviesContext } from "../../../context/MoviesParamsContext";
 
 
@@ -36,23 +36,23 @@ export const Pagination = () => {
     };
 
     return (
-        <Container direction="row" justify="center" margin="40px 0">
+        <Container $direction="row" $justify="center" $margin="40px 0">
             <Button onClick={prevPage}
-                variant="filled"
-                color="text"
-                rounded="5px"
-                size="md"
-                weight="700"
-                inactive={currentPage < 2 ? "true" : "false"}
+                $variant="filled"
+                $color="text"
+                $rounded="5px"
+                $size="md"
+                $weight="700"
+                $inactive={currentPage < 2 ? "true" : "false"}
             ><span>Prev</span></Button>
             <p style={{margin: "10px 20px", fontSize: "34px", fontWeight: "700"}}>{currentPage}</p>
             <Button
                 onClick={nextPage}
-                variant="filled"
-                color="text"
-                rounded="5px"
-                size="md"
-                weight="700"
+                $variant="filled"
+                $color="text"
+                $rounded="5px"
+                $size="md"
+                $weight="700"
             ><span>Next</span></Button>
         </Container>
     );

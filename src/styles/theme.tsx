@@ -7,16 +7,16 @@ interface Theme {
 
 const typography: Theme = {
   h1: {
-    fontSize: "36px",
+    fontSize: "46px",
   },
   h2: {
-    fontSize: "28 px",
+    fontSize: "32px",
   },
   h3: {
     fontSize: "26px",
   },
   h4: {
-    fontSize: "20px",
+    fontSize: "22px",
   },
   font: {
     header: 'Montserrat, sans-serif',

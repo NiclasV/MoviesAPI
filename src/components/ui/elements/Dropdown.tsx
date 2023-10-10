@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import useClickOutside from '../../../hooks/useClickoutside';
 import SvgIcon from './SvgIcon';
-import { useThemeContext } from '../../../context/ThemeContext';
-
 
 interface ChevronProps {
     rotate: boolean;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../components/ui/layout/Containers";
+import { Container } from "../components/layout/Containers";
 import styled from "styled-components";
 import { useThemeContext } from "../context/ThemeContext";
 import { Button } from "../components/ui/elements/Button";
@@ -35,26 +35,25 @@ const SunIcon = () => {
    );
 }
 
-export const Header: React.FC<HeaderProps> = ({ }) => {
+export const Header = () => {
    const { themeMode, toggleTheme } = useThemeContext();
 
    return (
       <HeaderStyled>
-         <Container variant="wide" direction="row" justify="space-between">
+         <Container $variant="wide" $direction="row" $justify="space-between">
             <Link to={"/"}><p>Movies'n'Stuff</p></Link>
-            <Container padding="0" direction="row" justify="flex-end" align-items="center">
+            <Container $padding="0" $direction="row" $justify="flex-end" $align-items="center">
                <Link to={"/watchlists"}><p style={{marginRight: "20px"}}>Watchlists</p></Link>
                <Button 
-                  variant="filled"
-                  color="primary" 
-                  padding="5px"
-                  rounded="true"
+                  $variant="filled"
+                  $color="primary" 
+                  $padding="5px"
+                  $rounded="true"
                   onClick={toggleTheme}
                   >
                   {themeMode === "light" ? <MoonIcon/> : <SunIcon/>}
                </Button>
             </Container>
-  
          </Container>
       </HeaderStyled>
    );

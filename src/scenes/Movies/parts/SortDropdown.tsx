@@ -1,9 +1,8 @@
-import React from "react";
-import { Container } from "../../../components/ui/layout/Containers";
+import { Container } from "../../../components/layout/Containers";
 import Dropdown from "../../../components/ui/elements/Dropdown";
 import { useMoviesContext } from "../../../context/MoviesParamsContext";
 
-const sortByArr = ["Popularity desc", "Popularity asc", "Revenue desc", "Revenue asc", "Releasedate asc", "Releasedate desc"]
+const sortByArr = ["Popularity desc",  "Revenue desc", "Vote_count desc"]
 
 export const SortDropdown = () => {
     const { searchParams, updateSearchParams } = useMoviesContext();
@@ -14,12 +13,13 @@ export const SortDropdown = () => {
 
         var newParams = new URLSearchParams(searchParams)
         
-        newParams.set(key, value)
+        newParams.set(key, value);
+        newParams.set("page", "1");
         updateSearchParams(newParams);
     };
 
     return (
-        <Container direction="row" alignitems="center" justify="flex-end" padding="0">
+        <Container $direction="row" $alignitems="center" $justify="flex-end" $padding="0">
             <p style={{margin: "0px", marginRight: "10px", fontSize: "13px"}}>SORT</p>
             <Dropdown label="Popularity desc" items={sortByArr} onItemClick={(item) => {
                 addOrUpdateParam("sort_by", item)

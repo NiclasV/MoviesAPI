@@ -7,6 +7,9 @@ export default createGlobalStyle`
         line-height: 1.55;
         font-family: ${(props) => props.theme.typography.font.main};
     }
+    .content {
+        min-height: 600px;
+    }
     *{
        box-sizing: border-box;
     }

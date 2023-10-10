@@ -1,8 +1,9 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { Movie } from "../models/MovieModel";
-import { Container } from "./ui/layout/Containers";
+import { Container } from "./layout/Containers";
 import { Link } from "react-router-dom";
+import { AddToWatchlist } from "./AddToWatchlist";
 
 interface MovieItemProps {
     children?: ReactNode | "",
@@ -18,11 +19,25 @@ const MovieItemStyled = styled.div<MovieItemProps>`
     background-color: ${(props) => props.theme.background[100]};
     border-radius: 10px;
     overflow: hidden;
+    border: 1px solid ${(props) => props.theme.background[300]};
+    box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.05);
 
     .image {
         width: 100%;
         background-color: ${(props) => props.theme.background[300]};
         position: relative;
+
+        .addToWatchlist {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            z-index: 99;
+
+            button {
+                position: relative; 
+                z-index: 1;
+            }
+        }
 
         &:after {
             content: "";
@@ -41,6 +56,10 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             top: 0;
             border-bottom: 4px solid  ${(props) => props.theme.primary[500]};
             transition: all 0.35s;
+            
+            &:hover {   
+                filter: brightness(115%);     
+            }
         }
 
         .noImg {
@@ -49,12 +68,6 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             position: absolute;
             left: 0;
             top: 0;
-        }
-
-        &:hover {
-            img {
-                filter: brightness(115%);
-            }
         }
     }
 
@@ -72,6 +85,7 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             margin-top: 0;
             margin-bottom: 10px;
             line-height: 1.3;
+            width: 100%;
         }
 
         p {
@@ -121,25 +135,26 @@ const MovieItem = ({ movie }: MovieItemProps) => {
             <MovieItemStyled>
                 <div className="image">
                     <Link to={`/movie/${movie.id}`}>
-
                         {movie.poster_path != null
                             ?
-                            <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} />
+                            <img src={"https://image.tmdb.org/t/p/w400/" + movie.poster_path} alt="" />
                             :
-                            <div className="noImg"></div>
+                            <div className="noImg" ></div>
                         }
-
                     </Link>
+                    {movie?.id ? (
+                        <AddToWatchlist movie={movie} />
+                    ) : (<></>)}
                 </div>
                 <div className="text">
-                    <h3><Link to={`/movie/${movie.id}`}>{movie.title ? truncateString(movie.title, 40) : ""}</Link></h3>
-                    <p className="description">{movie.overview ? truncateString(movie.overview, 140) : ""}</p>
+                    <h3 title={movie.title}><Link to={`/movie/${movie.id}`}>{movie.title ? truncateString(movie.title, 30) : ""}</Link></h3>
+                    <p className="description">{movie.overview ? truncateString(movie.overview, 110) : ""}</p>
                     <Container
-                        justify="space-between"
-                        alignitems="center"
-                        direction="row"
-                        padding="0px"
-                        margin="15px 0 0 0"
+                        $justify="space-between"
+                        $alignitems="center"
+                        $direction="row"
+                        $padding="0px"
+                        $margin="15px 0 0 0"
                     >
                         <p className="date">{movie.release_date}</p>
                         <p className="rating"><strong>{movie.vote_average}</strong></p>

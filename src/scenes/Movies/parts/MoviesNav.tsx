@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Container } from "../../../components/ui/layout/Containers";
+import { Container } from "../../../components/layout/Containers";
 import { useMoviesContext } from "../../../context/MoviesParamsContext";
 import { SortDropdown } from "./SortDropdown";
-
 
 const MovieNav = () => {
     const { searchParams } = useMoviesContext();
@@ -20,7 +19,7 @@ const MovieNav = () => {
     }, [searchParamsString, searchParams]);
 
     return (
-        <Container direction="row" margin="0 0 20px 0" padding="0">
+        <Container $direction="row" $margin="0 0 20px 0" $padding="0">
             <Container>
             </Container>
             <SortDropdown />

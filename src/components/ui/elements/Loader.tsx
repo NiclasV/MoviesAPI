@@ -6,31 +6,33 @@ interface LoaderProps {
 }
 const LoadWrapper = styled.div`
   position: relative;
-  width: 60px;
+  width: 100px;
   height: 6 0px
   margin: 0 auto;
 `;
 
-const LoaderEl= styled.div<LoaderProps>`
-  width: 90px;
-  height: 90px;
+const LoaderEl = styled.div<LoaderProps>`
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   position: relative;
   animation: rotate 1s linear infinite;
 
-  &:before , &:after {
+  &:before, &:after {
     content: "";
     box-sizing: border-box;
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 12px solid transparent;
-    animation: prixClipFix 1.65s linear infinite ;
+    border: 10px solid ${props => props.theme.primary[500]};
+    animation: prixClipFix 1.8s linear infinite;
   }
   &:after{
-    transform: rotate3d(90, 90, 0, 180deg );
-    border-color: ${(props) => props.theme.primary[600]};
- 
+    border: 8px solid ${props => props.theme.secondary[500]};
+    animation: prixClipFix 1.4s linear infinite , rotate 0.4s linear infinite reverse;
+    inset: 16px;
+  }
+
   @keyframes rotate {
     0%   {transform: rotate(0deg)}
     100%   {transform: rotate(360deg)}
@@ -38,8 +40,10 @@ const LoaderEl= styled.div<LoaderProps>`
 
   @keyframes prixClipFix {
       0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-      75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
   }
 `;
 
@@ -47,7 +51,7 @@ export const Loader: React.FC = () => {
 
   return (
     <LoadWrapper>
-      <LoaderEl/>
+      <LoaderEl />
     </LoadWrapper>
   )
 }

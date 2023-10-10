@@ -1,23 +1,22 @@
 import MovieNav from "./parts/MoviesNav";
-import MovieGrid from "./parts/MovieGrid";
+import MovieGrid from "../../components/MovieGrid";
 import { Pagination } from "./parts/Pagination";
 import { useMoviesContext } from "../../context/MoviesParamsContext";
-import { useFetch } from "../../hooks/useFetch";
-import { Section, Container } from "../../components/ui/layout/Containers";
+import { Section, Container } from "../../components/layout/Containers";
 
 const Movies = () => {
-  const { fetchUrl } = useMoviesContext()
-  const { data } = useFetch(fetchUrl);
+  const { movies } = useMoviesContext()
 
   return (
     <>
-    <Section variant="pStandard" justify="center">
-      <Container variant="wide">
-        <MovieNav />
-        <MovieGrid moviesData={data} />
-        <Pagination />
-      </Container>
-    </Section>
+      <Section $variant="pSmall" $justify="center">
+        <Container $variant="wide">
+          <h1 style={{margin: "10px 0 0 0",}}>Explore movies</h1>    
+          <MovieNav />
+          <MovieGrid movies={movies}/>
+          <Pagination />
+        </Container>
+      </Section>
     </>
   );
 }

@@ -1,27 +1,30 @@
 import { ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
-import MovieItem from "../../../components/MovieItem";
-import { Movie } from "../../../models/MovieModel";
-import { Loader } from "../../../components/ui/elements/Loader";
+import MovieItem from "./MovieItem";
+import { Movie } from "../models/MovieModel";
+import { Loader } from "./ui/elements/Loader";
 
-interface MoviesData {
-    results?: Movie[];
-}
 
 interface MovieGridProps {
     children?: ReactNode,
-    moviesData?: MoviesData | null,
+    movies: Movie[]| null, 
 }
 
-const MovieGridStyled = styled.div<MovieGridProps>`
+const MovieGridStyled = styled.div`
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     grid-gap: 10px;
     row-gap: 15px;
+
+    > div {
+        flex: 1 0 1;
+        min-width: 220px;
+        max-width: 300px;
+    }
 `
 
-const MovieGrid = ({ moviesData }: MovieGridProps) => {
+const MovieGrid = ({ movies }: MovieGridProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
@@ -32,14 +35,14 @@ const MovieGrid = ({ moviesData }: MovieGridProps) => {
             });
             window.scrollBy(0, -300)
           }
-    }, [moviesData])
+    }, [movies])
     
-    if (!moviesData) {
+    if (!movies) {
         return (<Loader/>);
     } else {
         return (
             <MovieGridStyled ref={containerRef}>
-                {moviesData.results?.map((movie) => (
+                {movies?.map((movie) => (
                     <MovieItem key={movie.id} movie={movie}></MovieItem>
                 ))}
             </MovieGridStyled>

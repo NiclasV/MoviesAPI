@@ -1,22 +1,21 @@
-import React from "react";
 import styled from "styled-components";
 
-interface Button {
-    padding?: string;
-    variant?: "filled" | "outline";
-    color?: "primary" | "secondary" | "text" | "background" | string;
-    rounded?: boolean | string;
-    weight?: string;
-    inactive?: "true" | "false";
-    size?: "sm" | "md" | "lg" | "xl";
+interface ButtonProps {
+    $padding?: string;
+    $variant?: "filled" | "outline";
+    $color?: "primary" | "secondary" | "text" | "background" | string;
+    $rounded?: boolean | string;
+    $weight?: string;
+    $inactive?: "true" | "false";
+    $size?: "sm" | "md" | "lg" | "xl";
 }
 
-export const Button = styled.button<Button>`
-    padding: ${({ padding }) => padding ? padding : "6px 16px"};
+export const Button = styled.button<ButtonProps>`
+    padding: ${({ $padding }) => $padding ? $padding : "6px 16px"};
     cursor: pointer;    
     text-decoration: none;
     color: ${(props) => props.theme.background[100]};
-    font-weight: ${({ weight })  => weight ? weight : "500"};
+    font-weight: ${({ $weight })  => $weight ? $weight : "500"};
     font-size: 18px;
     border: 2px solid transparent;
     display: flex;
@@ -26,36 +25,38 @@ export const Button = styled.button<Button>`
     background: transparent;
     text-transform: uppercase;
 
-    ${({inactive}) => {
-        if(inactive === "true") {
+    ${({$inactive}) => {
+        if($inactive === "true") {
             return `opacity: 0.5; pointer-events: none;`;
         }
     }}
-    ${({size}) => {
-        if(size && size === "sm") {
+    
+    ${({$size}) => {
+        if($size && $size === "sm") {
             return `font-size: 14px;`;
         }
-        if(size && size === "md") {
+        if($size && $size === "md") {
             return `font-size: 16px;`;
         }
-        if(size && size === "lg") {
+        if($size && $size === "lg") {
             return `font-size: 20px;`;
         }
-        if(size && size === "xl") {
+        if($size && $size === "xl") {
             return `font-size: 24px`;
         }
     }}
+    
     span {
         color: inherit;
     }
 
-    ${({ variant, color, rounded, theme }) => {
+    ${({ $variant, $color, $rounded, theme }) => {
 
         var buttonColor = "";
         var spanColor = "";
         var borderRadius = null;
 
-        switch(color) {
+        switch($color) {
             case "primary":
             buttonColor = theme.primary[500];
             break;
@@ -71,12 +72,12 @@ export const Button = styled.button<Button>`
             spanColor = theme.text[100]
             break;
             default:
-            buttonColor = color ? color : "inherit";
+            buttonColor = $color ? $color : "inherit";
             spanColor = "inherit";
             break;
         }
 
-        switch(rounded) {
+        switch($rounded) {
             case "true":
             borderRadius = `
                 border-top-left-radius: 100px;
@@ -86,18 +87,18 @@ export const Button = styled.button<Button>`
             `;
             break;
             default:
-            borderRadius = `border-radius: ${rounded}`;
+            borderRadius = `border-radius: ${$rounded}`;
             break;
         }
 
-        if (variant === "filled") {
+        if ($variant === "filled") {
             return `
                 background-color: ${buttonColor};
                 spanColor: ${spanColor};
                 ${borderRadius ? borderRadius : ""};
             `;
 
-        } else if(variant === "outline") {
+        } else if($variant === "outline") {
             return `
                 background-color: transparent;
                 border: 1px solid ${buttonColor};

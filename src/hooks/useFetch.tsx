@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import GetData from '../data/GetData';
+import GetData from '../actions/GetData';
 
 export const useFetch = (fetchUrl: string) => {
   const [data, setData] = useState(null);

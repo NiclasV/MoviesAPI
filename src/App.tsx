@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MovieProvider } from './context/MovieContext';
 import { WatchListProvider } from './context/WatchListContext';
 import { Watchlists } from './scenes/Watchlists/Watchlists';
+import { Footer } from './global/Footer';
 
 const App: React.FC = () => {
   const { localGet, localSet } = useLocalStorage();
@@ -30,21 +31,24 @@ const App: React.FC = () => {
           <Router>
             <Header />
             <Global />
-            <Routes>
-              <Route path="/" element={
-                <MoviesProvider>
-                  <Movies />
-                </MoviesProvider>
-              } />
-              <Route path="/movie/:id" element={
-                <MovieProvider>
-                  <Movie />
-                </MovieProvider>
-              } />
-              <Route path="/watchlists" element={
-                <Watchlists />
-              }></Route>
-            </Routes>
+            <div className="content">
+              <Routes>
+                <Route path="/" element={
+                  <MoviesProvider>
+                    <Movies />
+                  </MoviesProvider>
+                } />
+                <Route path="/movie/:id" element={
+                  <MovieProvider>
+                    <Movie />
+                  </MovieProvider>
+                } />
+                <Route path="/watchlists" element={
+                  <Watchlists />
+                }></Route>
+              </Routes>
+              </div>
+              <Footer />
           </Router>
         </WatchListProvider>
       </div>

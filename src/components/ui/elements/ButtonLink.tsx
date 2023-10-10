@@ -6,7 +6,7 @@ interface LinkProps {
     as?: 'a' | 'button'; // Define the allowed values for the `as` prop
 }
 
-export const Link = styled(Button).attrs<LinkProps>((props) => ({
+export const ButtonLink = styled(Button).attrs<LinkProps>((props) => ({
     as: props.as || 'a',  }))<LinkProps>`
     ${({ as }) => as?.toLowerCase() !== 'button' &&
     css`

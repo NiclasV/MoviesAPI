@@ -13,7 +13,6 @@ const GetData = (url:string, custOptions?: {}): Promise<any> => {
 
     return fetch(url, newOptions)
     .then(res => res.json())
-    // .then(json => console.log(json))
     .catch(err => console.error('error:' + err));
 }
 
