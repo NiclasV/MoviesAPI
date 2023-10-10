@@ -46,7 +46,7 @@
 - ~~Make each movie linkable for new page with more moviedata~~
 - ~~Create some filtration possibilites targeting searchparams, sort-order etc~~
 - ~~Create watchlist functionality, adding movies to a watchlist (localStorage)~~
-- ~~Create a "Similar to this"-listing while viewing a single movie
+- ~~Create a "Similar to this"-listing while viewing a single movie ~~
 - ~~Enable dynamic page-titles based of the scenes/pages
 
 #### License
