@@ -6,6 +6,7 @@ import MovieItem from "./MovieItem";
 import { styled } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { GetGenre } from '../actions/GetGenre';
+import { Loader } from './ui/elements/Loader';
 
 const SwiperStyled = styled.div`
     width: 100%;
@@ -44,43 +45,47 @@ const SwiperStyled = styled.div`
 `;
 
 export const MovieSlider = () => {
-    const { movies, randomizedGenres } = useMovieContext();
+    const { movies, randomizedGenres, moviesLoading } = useMovieContext();
     const [genreString, setGenreString] = useState<String>("");
 
     useEffect(() => {
         const generateGenreString = () => {
-          const gArr: string[] = []; // Define gArr as an array of strings
-          randomizedGenres?.forEach((genre) => {
-            const genreLabel = GetGenre(genre);
-            if (typeof genreLabel === 'string') {
-              gArr.push(genreLabel); // Push the genre label into the array
-            }
-          });
-      
-          const gString: string = gArr.join(" | ");
-          setGenreString(gString);
+            const gArr: string[] = []; // Define gArr as an array of strings
+            randomizedGenres?.forEach((genre) => {
+                const genreLabel = GetGenre(genre);
+                if (typeof genreLabel === 'string') {
+                    gArr.push(genreLabel); // Push the genre label into the array
+                }
+            });
+
+            const gString: string = gArr.join(" | ");
+            setGenreString(gString);
         };
-      
+
         if (randomizedGenres && randomizedGenres.length > 0) {
-          generateGenreString();
+            generateGenreString();
         }
-      }, [randomizedGenres]);
-      
+    }, [randomizedGenres]);
+
 
     return (
         <Section $variant="pStandard">
             <Container $variant="wide">
-                <h2 style={{margin: "0px"}}>More like this</h2>
-                <p style={{margin: "0 0 20px"}}>{genreString}</p>
-                <SwiperStyled>
-                    <Swiper slidesPerView={5} slidesPerGroup={5} spaceBetween={10} style={{ width: '100%' }} navigation pagination={{ clickable: true }} >
-                        {movies?.map((movie) => (
-                            <SwiperSlide key={movie.id}>
-                                <MovieItem movie={movie}></MovieItem>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </SwiperStyled>
+                <h2 style={{ margin: "0px" }}>More like this</h2>
+                <p style={{ margin: "0 0 20px" }}>{genreString}</p>
+                {(!movies || moviesLoading) ? (
+                    <Loader />
+                ) : (
+                    <SwiperStyled>
+                        <Swiper slidesPerView={5} slidesPerGroup={5} spaceBetween={10} style={{ width: '100%' }} navigation pagination={{ clickable: true }} >
+                            {movies?.map((movie) => (
+                                <SwiperSlide key={movie.id}>
+                                    <MovieItem movie={movie}></MovieItem>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </SwiperStyled>
+                )}
             </Container>
         </Section>
     );

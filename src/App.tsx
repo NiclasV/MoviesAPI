@@ -13,6 +13,7 @@ import { MovieProvider } from './context/MovieContext';
 import { WatchListProvider } from './context/WatchListContext';
 import { Watchlists } from './scenes/Watchlists/Watchlists';
 import { Footer } from './global/Footer';
+import { About } from './scenes/About/About';
 
 const App: React.FC = () => {
   const { localGet, localSet } = useLocalStorage();
@@ -45,6 +46,9 @@ const App: React.FC = () => {
                 } />
                 <Route path="/watchlists" element={
                   <Watchlists />
+                }></Route>
+                     <Route path="/about" element={
+                  <About   />
                 }></Route>
               </Routes>
               </div>

@@ -3,8 +3,8 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
     body {
         background-color: ${(props) => props.theme.background[200] };
-        color: ${(props) => props.theme.text[200]};
-        line-height: 1.55;
+        color: ${(props) => props.theme.text[300]};
+        line-height: 1.7;
         font-family: ${(props) => props.theme.typography.font.main};
     }
     .content {
@@ -31,7 +31,9 @@ export default createGlobalStyle`
     }
 
     h1, h2, h3, h4, h5 {
+        color: ${(props) => props.theme.text[200]};
         font-family: ${(props) => props.theme.typography.font.header};
+        margin: 20px 0;
 
         a {
             text-decoration: none;

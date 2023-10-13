@@ -15,24 +15,17 @@ const Chevron = ({rotate}: ChevronProps) => {
     )
 }
 
-// Define the DropdownWrapper styled-component
-const DropdownWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  min-width: 150px;
-`;
-
 // Define the DropdownLabel styled-component
 const DropdownLabel = styled.div`
   border: 1px solid ${(props) => props.theme.background[300]};
   background-color: ${(props) => props.theme.background[100]};
-  padding: 7px 10px 7px 15px;
+  padding: 8px 10px 8px 15px;
   cursor: pointer;
   width: 100%;  
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 5px;
+  border-radius: 7px;
 
   p {
     margin: 0;
@@ -40,7 +33,7 @@ const DropdownLabel = styled.div`
     border-right: 2px solid ${(props) => props.theme.background[200]};
     position: relative;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     pointer-events: none;
     color: ${(props) => props.theme.text[400]}
@@ -58,6 +51,19 @@ const DropdownLabel = styled.div`
     }
   }
 `;
+// Define the DropdownWrapper styled-component
+const DropdownWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  min-width: 150px;
+
+  &.open {
+    ${DropdownLabel} {
+        outline: 1px solid  ${(props) => props.theme.primary[500]};
+    }
+  }
+`;
+
 
 interface DropdownListProps {
     open: boolean,
@@ -128,7 +134,7 @@ const Dropdown = ({ label, items, onItemClick }: DropdownProps) => {
     });
 
     return (
-        <DropdownWrapper ref={dropdownRef}>
+        <DropdownWrapper ref={dropdownRef} className={isOpen ? "open" : ""}>
             <DropdownLabel onClick={toggleDropdown}><p>{selectedItem}</p><Chevron rotate={isOpen}/></DropdownLabel>
             <DropdownList open={isOpen}>
                 {items.map((item) => (

@@ -20,7 +20,6 @@ export const SortDropdown = () => {
 
     return (
         <Container $direction="row" $alignitems="center" $justify="flex-end" $padding="0">
-            <p style={{margin: "0px", marginRight: "10px", fontSize: "13px"}}>SORT</p>
             <Dropdown label="Popularity desc" items={sortByArr} onItemClick={(item) => {
                 addOrUpdateParam("sort_by", item)
             }} />

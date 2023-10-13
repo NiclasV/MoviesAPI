@@ -7,6 +7,8 @@ interface MoviesContextType {
   searchParams: URLSearchParams;
   updateSearchParams: (newParams: URLSearchParams) => void;
   movies: Movie[] | null;
+  updateSearchQuery: (query: string) => void;
+  totalResults: number | null;
 }
 
 const MoviesParamsContext = createContext<MoviesContextType | undefined>(undefined);
@@ -41,11 +43,18 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [searchParams, setSearchParams] = useState<URLSearchParams>(initParams);
   const [movies, setMovies] = useState<Movie[] | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string | null>(null);
+  const [totalResults, setTotalResults] = useState<number | null>(null);
   const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
+  const searchBaseUrl: string = "https://api.themoviedb.org/3/search/movie?";
 
   const updateSearchParams = (newParams: URLSearchParams) => {
     setSearchParams(newParams);
   };
+
+  const updateSearchQuery = (query: string) => {
+    setSearchQuery(query)
+  }
 
   // useMemo to memoize the fetch URL
   const fetchUrl = useMemo(() => {
@@ -66,15 +75,29 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
     const fetchMovies = async () => {
       const data = await FetchData(fetchUrl, abortControllerRef);
       setMovies(data?.results);
+      setTotalResults(data?.total_results);
       setHistoryUrl();
     };
 
-    fetchMovies()
+    const fetchSearchMovies = async () => {
+      const searchUrl = searchBaseUrl + searchParams.toString() + "&query=" + searchQuery;
+      const data = await FetchData(searchUrl, abortControllerRef);
+      setMovies(data?.results);
+      setTotalResults(data?.total_results);
+    };
 
-  }, [fetchUrl, searchParams]);
+    if(!searchQuery || searchQuery.length < 3) {
+      fetchMovies()
+    }
+
+    if(searchQuery && searchQuery.length > 2) {
+      fetchSearchMovies();
+    }
+
+  }, [fetchUrl, searchParams, searchQuery]);
 
   return (
-    <MoviesParamsContext.Provider value={{ searchParams, updateSearchParams, movies }}>
+    <MoviesParamsContext.Provider value={{ searchParams, updateSearchParams, movies, updateSearchQuery, totalResults }}>
       {children}
     </MoviesParamsContext.Provider>
   );

@@ -20,7 +20,6 @@ const baseContainer = styled.div<baseContentProps>`
     background-color:  ${({ $bgColor }) => $bgColor};
 `;
 
-
 interface ContentProps {
     $variant?: 'standard' | 'wide' | 'small' | "";
 }
@@ -38,7 +37,7 @@ const contentVariants = {
 };
 
 export const Container = styled(baseContainer) <ContentProps>`
-    width: 100%;
+    width: ${({ $width }) => $width || "100%"};
     padding: ${({ $padding }) => $padding ? $padding : "0 40px"};
     max-width: ${(props) => props.$width ? props.$width : "100%"};
     ${({ $variant }) => $variant ? contentVariants[$variant] : `

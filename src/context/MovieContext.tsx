@@ -8,6 +8,8 @@ interface MovieContextType {
     movie: MovieFull | null;
     movies?: Movie[] | null;
     randomizedGenres?: number[] | null;
+    moviesLoading: boolean;
+    movieLoading: boolean;
 }
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -25,6 +27,8 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
     const apiKey = process.env.REACT_APP_API_KEY;
     const abortControllerRef = useRef<AbortController | null>(null);
     const MoviesAbortControllerRef = useRef<AbortController | null>(null);
+    const [movieLoading, setMovieLoading] = useState<boolean>(false);
+    const [moviesLoading, setMoviesLoading] = useState<boolean>(false);
 
     const [movie, setMovie] = useState<MovieFull | null>(null);
     const [movies, setMovies] = useState<Movie[] | null>(null);
@@ -52,10 +56,13 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
     // Update the movie state when the data changes
     useEffect(() => {
         const fetchMovie = async () => {
+            setMovieLoading(true);
             const baseUrl = "https://api.themoviedb.org/3/movie/";
             const fetchUrl = baseUrl + id + "?api-key=" + apiKey + "&append_to_response=videos";
             const data = await FetchData(fetchUrl, abortControllerRef);
             setMovie(data);
+            setMovieLoading(false);
+
         };
 
         fetchMovie()
@@ -98,6 +105,8 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
 
         const fetchMovies = async () => {
             if (genres) {
+                setMoviesLoading(true);
+
                 const randomPage = getRandomVal(possiblePage);
                 const randomSort = getRandomVal(possibleSorts);
                 const fetchMoviesUrl = "https://api.themoviedb.org/3/discover/movie?with_genres=" + getRandomGenreIds(genres) + "&page=" + randomPage + "&sort_by=" + randomSort;
@@ -107,6 +116,7 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
                 const shuffledMovies = data?.results ? shuffleArray([...data.results ]) : [];
                 const shuffledMoviesWithoutActive = shuffledMovies.filter(x => x.id !== (id ? parseInt(id) : undefined));
                 setMovies(shuffledMoviesWithoutActive);
+                setMoviesLoading(false);
             }
         }
         if (genres) {
@@ -115,7 +125,7 @@ export const MovieProvider = ({ children }: PropsWithChildren) => {
     }, [genres])
 
     return (
-        <MovieContext.Provider value={{ movie, movies, randomizedGenres }}>
+        <MovieContext.Provider value={{ movie, movies, randomizedGenres, movieLoading, moviesLoading}}>
             {children}
         </MovieContext.Provider>
     );

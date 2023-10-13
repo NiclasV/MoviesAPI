@@ -1,10 +1,10 @@
-import React from "react";
 import { Container } from "../components/layout/Containers";
 import styled from "styled-components";
 import { useThemeContext } from "../context/ThemeContext";
 import { Button } from "../components/ui/elements/Button";
 import SvgIcon from "../components/ui/elements/SvgIcon";
 import { Link } from "react-router-dom";
+import { MainNav } from "./MainNav";
 interface HeaderProps { }
 
 const HeaderStyled = styled.div<HeaderProps>`
@@ -41,9 +41,9 @@ export const Header = () => {
    return (
       <HeaderStyled>
          <Container $variant="wide" $direction="row" $justify="space-between">
-            <Link to={"/"}><p>Movies'n'Stuff</p></Link>
+            <Link to={"/"}><p style={{margin: "0  "}}>Movies'n'Stuff</p></Link>
             <Container $padding="0" $direction="row" $justify="flex-end" $align-items="center">
-               <Link to={"/watchlists"}><p style={{marginRight: "20px"}}>Watchlists</p></Link>
+               <MainNav />
                <Button 
                   $variant="filled"
                   $color="primary" 
