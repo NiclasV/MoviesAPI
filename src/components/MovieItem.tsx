@@ -58,7 +58,7 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             transition: all 0.35s;
             
             &:hover {   
-                filter: brightness(115%);     
+                filter: brightness(120%);     
             }
         }
 

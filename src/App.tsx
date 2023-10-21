@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Movies from './scenes/Movies/Movies';
 import Global from './styles/global';
 import { ThemeProvider } from 'styled-components';
@@ -14,8 +14,10 @@ import { WatchListProvider } from './context/WatchListContext';
 import { Watchlists } from './scenes/Watchlists/Watchlists';
 import { Footer } from './global/Footer';
 import { About } from './scenes/About/About';
+import { NotificationsProvider } from './context/NotificationsContext';
+import { Notifications } from './components/Notifications';
 
-const App: React.FC = () => {
+const App = () => {
   const { localGet, localSet } = useLocalStorage();
   const [currentTheme] = useState(localGet('theme') ? localGet('theme') : 'light')
   const { themeMode } = useThemeContext();
@@ -28,33 +30,36 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={themeMode === "light" ? lightTheme : darkTheme}>
       <div className="App">
-        <WatchListProvider>
-          <Router>
-            <Header />
-            <Global />
-            <div className="content">
-              <Routes>
-                <Route path="/" element={
-                  <MoviesProvider>
-                    <Movies />
-                  </MoviesProvider>
-                } />
-                <Route path="/movie/:id" element={
-                  <MovieProvider>
-                    <Movie />
-                  </MovieProvider>
-                } />
-                <Route path="/watchlists" element={
-                  <Watchlists />
-                }></Route>
-                     <Route path="/about" element={
-                  <About   />
-                }></Route>
-              </Routes>
+        <NotificationsProvider>
+          <Notifications />
+          <WatchListProvider>
+            <Router>
+              <Header />
+              <Global />
+              <div className="content">
+                <Routes>
+                  <Route path="/" element={
+                    <MoviesProvider>
+                      <Movies />
+                    </MoviesProvider>
+                  } />
+                  <Route path="/movie/:id" element={
+                    <MovieProvider>
+                      <Movie />
+                    </MovieProvider>
+                  } />
+                  <Route path="/watchlists" element={
+                    <Watchlists />
+                  }></Route>
+                  <Route path="/about" element={
+                    <About />
+                  }></Route>
+                </Routes>
               </div>
               <Footer />
-          </Router>
-        </WatchListProvider>
+            </Router>
+          </WatchListProvider>
+        </NotificationsProvider>
       </div>
     </ThemeProvider>
   );

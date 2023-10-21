@@ -28,14 +28,17 @@ const MovieGrid = ({ movies }: MovieGridProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
-        if (containerRef.current) {
+        const searchParams = new URLSearchParams(window.location.search);
+        const page = searchParams.get('page');
+    
+        if (containerRef.current && page) {
             containerRef.current.scrollIntoView({ 
-                block: 'start',   // Align with the top of the viewport
-                inline: 'nearest', // Maintain horizontal alignment
+                block: 'start',   
+                inline: 'nearest', 
             });
-            window.scrollBy(0, -300)
+            window.scrollBy(0, -240)
           }
-    }, [movies])
+    }, [window.location.search])
     
     if (!movies) {
         return (<Loader/>);
