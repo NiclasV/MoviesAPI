@@ -40,12 +40,14 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
     initParams.set("primary_release_date.lte", getTodaysDate())
   }
 
+  const baseUrl: string = "https://api.themoviedb.org/3/";
+
   const abortControllerRef = useRef<AbortController | null>(null);
   const [searchParams, setSearchParams] = useState<URLSearchParams>(initParams);
   const [movies, setMovies] = useState<Movie[] | null>(null);
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState<number | null>(null);
-  const baseUrl: string = "https://api.themoviedb.org/3/discover/movie?";
+  const [fetchUrl, setFetchUrl] = useState<string>(baseUrl + "discover/movie?" + searchParams.toString());
   const searchBaseUrl: string = "https://api.themoviedb.org/3/search/movie?";
 
   const updateSearchParams = (newParams: URLSearchParams) => {
@@ -56,14 +58,24 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
     setSearchQuery(query)
   }
 
-  // useMemo to memoize the fetch URL
-  const fetchUrl = useMemo(() => {
-    var lp = new URLSearchParams(searchParams)
 
-    return baseUrl + lp.toString();
+  useEffect(() => {
+    const constructFetchUrl = () => {
+      var lp = new URLSearchParams(searchParams)
 
-  }, [searchParams]);
+      if(!searchQuery || searchQuery.length < 3) {
+        const url = baseUrl + "discover/movie?" + lp.toString();
+        setFetchUrl(url)
+      }
+      if(searchQuery && searchQuery.length > 2) {
+        const url = baseUrl + "search/movie?" + lp.toString() + "&query=" + searchQuery;
+        setFetchUrl(url)
+      }
+    }
 
+    constructFetchUrl();
+
+  }, [searchParams, searchQuery])
 
   useEffect(() => {
     const setHistoryUrl = () => {
@@ -78,23 +90,9 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
       setTotalResults(data?.total_results);
       setHistoryUrl();
     };
+    fetchMovies()
 
-    const fetchSearchMovies = async () => {
-      const searchUrl = searchBaseUrl + searchParams.toString() + "&query=" + searchQuery;
-      const data = await FetchData(searchUrl, abortControllerRef);
-      setMovies(data?.results);
-      setTotalResults(data?.total_results);
-    };
-
-    if(!searchQuery || searchQuery.length < 3) {
-      fetchMovies()
-    }
-
-    if(searchQuery && searchQuery.length > 2) {
-      fetchSearchMovies();
-    }
-
-  }, [fetchUrl, searchParams, searchQuery]);
+  }, [fetchUrl]);
 
   return (
     <MoviesParamsContext.Provider value={{ searchParams, updateSearchParams, movies, updateSearchQuery, totalResults }}>
