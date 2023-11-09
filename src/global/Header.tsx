@@ -41,7 +41,7 @@ export const Header = () => {
    return (
       <HeaderStyled>
          <Container $variant="wide" $direction="row" $justify="space-between">
-            <Link to={"/"}><p style={{margin: "0  "}}>Movies'n'Stuff</p></Link>
+            <Link to={"/React-MoviesAPI/"}><p style={{margin: "0  "}}>Movies'n'Stuff</p></Link>
             <Container $padding="0" $direction="row" $justify="flex-end" $align-items="center">
                <MainNav />
                <Button 

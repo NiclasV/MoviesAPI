@@ -25,7 +25,7 @@ export const Watchlists = () => {
                 {movies && movies.length > 0 ? (
                     <MovieGrid movies={movies}/>
                 ) : (
-                    <p>No movies added to your watchlist yet, <Link to="/">explore movies</Link></p>
+                    <p>No movies added to your watchlist yet, <Link to="/React-MoviesAPI/">explore movies</Link></p>
                 )}
             </Container>
         </Section>

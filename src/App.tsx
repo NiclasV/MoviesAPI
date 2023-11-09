@@ -38,7 +38,7 @@ const App = () => {
               <Global />
               <div className="content">
                 <Routes>
-                  <Route path="/" element={
+                  <Route path="/React-MoviesAPI/" element={
                     <MoviesProvider>
                       <Movies />
                     </MoviesProvider>
