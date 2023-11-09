@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "customize": "node config-overrides.js",
+    "customize": "node config-overrides.js"
   },
   "eslintConfig": {
     "extends": [
