@@ -92,7 +92,7 @@ export const MainNav = () => {
         <StyledNav ref={navRef}>
             <ul>
                 <li>
-                    <NavLink end to="/" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink end to="/React-MoviesAPI/" className={({ isActive }) => isActive ? 'active' : ''}>
                         Movies
                     </NavLink>
                 </li>
