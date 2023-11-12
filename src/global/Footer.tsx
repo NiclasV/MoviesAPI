@@ -20,7 +20,8 @@ const StyledFooter = styled.footer`
     justify-content: center;
     border-top: 1px solid ${(props) => props.theme.background[300]};
     min-height: 240px;
-
+    margin-top: 60px;
+    
     .text-block {
         max-width: 860px;
         font-size: 13px;

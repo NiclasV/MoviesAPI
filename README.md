@@ -1,6 +1,6 @@
 # Movies Project
 
-### [View it here](https://niclasv.github.io/React-MoviesAPI/)
+### [Visit project here](https://niclasv.github.io/React-MoviesAPI/)
 
 ### Overview
 

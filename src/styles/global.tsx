@@ -2,13 +2,13 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
     body {
-        background-color: ${(props) => props.theme.background[200] };
+        background-color: ${(props) => props.theme.background[200]};
         color: ${(props) => props.theme.text[300]};
         line-height: 1.7;
         font-family: ${(props) => props.theme.typography.font.main};
     }
     .content {
-        min-height: 600px;
+        min-height: 800px;
     }
     *{
        box-sizing: border-box;
