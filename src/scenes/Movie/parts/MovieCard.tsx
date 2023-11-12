@@ -153,7 +153,7 @@ export const MovieCard = () => {
                             <p className="tagline">{movie?.tagline}</p>
                             <div className="genres">
                                 {movie.genres?.map(genre => (
-                                    <Link to={`/?with_genres=${genre.id}`} key={genre.id}><p key={genre.id}>{genre.name}</p></Link>
+                                    <Link to={`/React-MoviesAPI/?with_genres=${genre.id}`} key={genre.id}><p key={genre.id}>{genre.name}</p></Link>
                                 ))}
                             </div>
                             <p className="overview">{movie?.overview}</p>

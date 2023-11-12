@@ -106,15 +106,17 @@ const MovieItemStyled = styled.div<MovieItemProps>`
             &.rating {
                 margin: 0;
                 line-height: 1;
-                padding: 10px 15px;
+                padding: 5px 15px 7px;
                 display: inline-flex;
                 color: ${(props) => props.theme.text[900]};
-                border-radius: 25px;
+                border-radius: 100px 100px 100px 100px;
                 background-color: ${(props) => props.theme.primary[500]};
                 text-align: Center;
                 align-self: flex-end;
                 display: inline-flex;   
                 align-items: flex-end;  
+                font-size: 18px;
+                line-height: 1;
             }
         }
     }

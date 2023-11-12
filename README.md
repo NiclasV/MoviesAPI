@@ -1,10 +1,9 @@
 # Movies Project
 
-### [Visit project](https://niclasv.github.io/React-MoviesAPI/).
-
 ### Overview
 
 #### This project is a playground for exploring React, TypeScript, styled-components and data fetching using The Movie Database API. It provides an opportunity to experiment with various aspects of modern web development.
+
 
 ### Technologies Used
 
@@ -50,4 +49,6 @@
 - ~~Create a "Similar to this"-listing while viewing a single movie~~
 - ~~Enable dynamic page-titles based of the scenes/pages
 
-  ### [Visit project](https://niclasv.github.io/React-MoviesAPI/).
+#### License
+
+This project is open-source and available under the MIT License.

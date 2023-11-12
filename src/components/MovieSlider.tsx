@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import { Section, Container } from "./layout/Containers";
 import { useMovieContext } from "../context/MovieContext";
 import MovieItem from "./MovieItem";
@@ -7,6 +8,7 @@ import { styled } from 'styled-components';
 import { useEffect, useState } from 'react';
 import { GetGenre } from '../actions/GetGenre';
 import { Loader } from './ui/elements/Loader';
+import { Navigation } from 'swiper/modules';
 
 const SwiperStyled = styled.div`
     width: 100%;
@@ -16,14 +18,27 @@ const SwiperStyled = styled.div`
 
     .swiper-button {
         &-prev, &-next {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 70px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);    
             z-index: 9;
-            background-color: ${props => props.theme.background[200]};
-            display: none;
+            color: ${(props) => props.theme.secondary[500]};
+            opacity: 0;
+            background-color: rgba(0,0,0, .25);
+            padding: 10px 5px;
+            transition: opacity 0.25s;
+
+            &:after {
+                font-size: 50px;
+                font-weight 700;
+            }
+
+            &-disabled {
+                pointer-events: all!important;
+                opacity: 0.25!important;
+            }
         }
         &-prev {
             left: 5px;
@@ -32,6 +47,7 @@ const SwiperStyled = styled.div`
             right: 5px;
         }
     }
+    
     .swiper-wrapper {
  
         .swiper-slide {
@@ -39,6 +55,14 @@ const SwiperStyled = styled.div`
 
             > div {
                 height: 100%;
+            }
+        }
+    }
+    
+    &:hover {
+        .swiper-button {
+            &-prev, &-next {
+                opacity: 1;
             }
         }
     }
@@ -77,7 +101,7 @@ export const MovieSlider = () => {
                     <Loader />
                 ) : (
                     <SwiperStyled>
-                        <Swiper slidesPerView={5} slidesPerGroup={5} spaceBetween={10} style={{ width: '100%' }} navigation pagination={{ clickable: true }} >
+                        <Swiper slidesPerView={5} slidesPerGroup={5} spaceBetween={10} style={{ width: '100%' }} navigation={true} modules={[Navigation]}  >
                             {movies?.map((movie) => (
                                 <SwiperSlide key={movie.id}>
                                     <MovieItem movie={movie}></MovieItem>

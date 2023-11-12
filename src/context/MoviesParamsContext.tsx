@@ -48,7 +48,6 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState<number | null>(null);
   const [fetchUrl, setFetchUrl] = useState<string>(baseUrl + "discover/movie?" + searchParams.toString());
-  const searchBaseUrl: string = "https://api.themoviedb.org/3/search/movie?";
 
   const updateSearchParams = (newParams: URLSearchParams) => {
     setSearchParams(newParams);
@@ -57,7 +56,6 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
   const updateSearchQuery = (query: string) => {
     setSearchQuery(query)
   }
-
 
   useEffect(() => {
     const constructFetchUrl = () => {

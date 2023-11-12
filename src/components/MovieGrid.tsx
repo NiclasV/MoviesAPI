@@ -12,15 +12,25 @@ interface MovieGridProps {
 
 const MovieGridStyled = styled.div`
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: 10px;
-    row-gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+
+    @media (max-width: 1280px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 680px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 520px) {
+        grid-template-columns: 1fr;
+    }
 
     > div {
-        flex: 1 0 1;
-        min-width: 220px;
-        max-width: 300px;
+        width: 100%;
     }
 `
 
