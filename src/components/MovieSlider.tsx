@@ -13,11 +13,11 @@ import { Navigation } from 'swiper/modules';
 const SwiperStyled = styled.div`
     width: 100%;
     position: relative;
-    overflow: auto;
     padding-bottom: 10px;
-
+    overflow: hidden;
+    
     .swiper-button {
-        &-prev, &-next {
+        &-prev, &-next {    
             width: 50px;
             height: 70px;
             position: absolute;
@@ -30,10 +30,23 @@ const SwiperStyled = styled.div`
             padding: 10px 5px;
             transition: opacity 0.25s;
 
+            @media (max-width: 820px) {
+                opacity: 1;
+                background-color: rgba(0,0,0, .55);
+                width: 30px;
+                height: 50px;
+
+            }
+
             &:after {
                 font-size: 50px;
                 font-weight 700;
+                @media (max-width: 820px) {
+                    font-size: 30px;
+                }
             }
+
+         
 
             &-disabled {
                 pointer-events: all!important;
@@ -49,12 +62,15 @@ const SwiperStyled = styled.div`
     }
     
     .swiper-wrapper {
- 
+        width: 100%;
+
         .swiper-slide {
-            height: auto;
+            height: auto!important;
+            width: 100%;
 
             > div {
                 height: 100%;
+                width: 100%;
             }
         }
     }
@@ -93,24 +109,51 @@ export const MovieSlider = () => {
 
 
     return (
-        <Section $variant="pStandard">
-            <Container $variant="wide">
-                <h2 style={{ margin: "0px" }}>More like this</h2>
-                <p style={{ margin: "0 0 20px" }}>{genreString}</p>
-                {(!movies || moviesLoading) ? (
-                    <Loader />
-                ) : (
-                    <SwiperStyled>
-                        <Swiper slidesPerView={5} slidesPerGroup={5} spaceBetween={10} style={{ width: '100%' }} navigation={true} modules={[Navigation]}  >
-                            {movies?.map((movie) => (
-                                <SwiperSlide key={movie.id}>
-                                    <MovieItem movie={movie}></MovieItem>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </SwiperStyled>
-                )}
-            </Container>
-        </Section>
+        <Container $variant="wide" $margin="60px 0 20px">
+            <h2 style={{ margin: "0px" }}>More like this</h2>
+            <p style={{ margin: "0 0 20px" }}>{genreString}</p>
+            {(!movies || moviesLoading) ? (
+                <Loader />
+            ) : (
+                <SwiperStyled>
+                    <Swiper
+                        spaceBetween={10}
+                        navigation={true}
+                        modules={[Navigation]}
+                        breakpoints={{
+                            // when window width is >= 640px
+                            400: {
+                                slidesPerView: 1,
+                                slidesPerGroup: 1,
+                                spaceBetween: 15,
+                            },
+                            // when window width is >= 768px
+                            580: {
+                                slidesPerView: 2,
+                                slidesPerGroup: 2,
+                            },
+                            680: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 3,
+                            },
+                            880: {
+                                slidesPerView: 4,
+                                slidesPerGroup: 4,
+                            },
+                            1220: {
+                                slidesPerView: 5,
+                                slidesPerGroup: 5,
+                            },
+                        }}
+                    >
+                        {movies?.map((movie) => (
+                            <SwiperSlide key={movie.id}>
+                                <MovieItem movie={movie}></MovieItem>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </SwiperStyled>
+            )}
+        </Container>
     );
 }

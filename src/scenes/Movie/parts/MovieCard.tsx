@@ -15,13 +15,31 @@ const MovieCardStyled = styled.div`
   box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.05);
   border-bottom: 1px solid ${(props) => props.theme.background[300]};
 
+  @media (max-width: 1024px) {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  @media (max-width: 560px) {
+    display: flex;
+    flex-direction: column; 
+  }
+
   .text {
+    width: 100%;
     padding: 40px;
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media (max-width: 920px) {
+      padding: 30px;
+    }
   }
 
   .bottom {
@@ -30,6 +48,7 @@ const MovieCardStyled = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+
   h1 {
     margin-top: 0;
     margin-bottom: 5px;
@@ -38,18 +57,33 @@ const MovieCardStyled = styled.div`
     font-size: 46px;
     line-height: 1.2;
     border-bottom: 2px solid ${props => props.theme.secondary[500]};
+
+    @media (max-width: 1024px) {
+      font-size: 36px;
+    }
+    @media (max-width: 560px) {
+      font-size: 26 px;
+    }
   }
 
   .tagline {
     color: ${props => props.theme.text[100]};
     font-size: 24px;
     margin: 0px 0 15px;
+
+    @media (max-width: 1024px) {
+      font-size: 20px;
+    }
   }
 
   .overview {
-    line-height: 1.8  ;
+    line-height: 1.8;
     font-size: 16px;
     color: ${props => props.theme.text[200]};
+
+    @media (max-width: 1024px) {
+      font-size: 14px;
+    }
   }
 
   .date {
@@ -60,6 +94,7 @@ const MovieCardStyled = styled.div`
 
   .genres {
     display: flex;
+    flex-wrap: wrap;
 
     a {
       text-decoration: none;
@@ -75,6 +110,12 @@ const MovieCardStyled = styled.div`
       margin: 0;
       margin-right: 10px;
       border-radius: 10px;
+      margin-bottom: 5px;
+
+      @media (max-width: 1024px) {
+        font-size: 11px;
+        padding: 2px 8px;
+      }
     }
   }
 
@@ -92,6 +133,11 @@ const MovieCardStyled = styled.div`
     display: inline-flex;   
     align-items: flex-end;  
 
+    @media (max-width: 1024px) {
+      font-size: 14px;
+      padding: 6px 10px;
+    }
+
     strong {
       margin-right: 2px;
     }
@@ -104,6 +150,11 @@ const MovieCardStyled = styled.div`
       max-width: 100%;
       border-right: 4px solid ${props => props.theme.primary[500]};
       display: block;
+      @media (max-width: 1024px) {
+        border-right: none;
+        border-bottom: 4px solid ${props => props.theme.primary[500]};
+ 
+      }
     }
     .addToWatchlist {
       position: absolute;
@@ -134,7 +185,7 @@ export const MovieCard = () => {
     }, [movieLoading])
 
     return (
-        <div style={{minHeight: "600px"}}  ref={containerRef}>
+        <div style={{minHeight: "400px"}}  ref={containerRef}>
             {(!movie || movieLoading) ? (
                 <Container $margin="40px 0">
                     <Loader />

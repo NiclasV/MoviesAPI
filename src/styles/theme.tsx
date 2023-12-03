@@ -7,16 +7,20 @@ interface Theme {
 
 const typography: Theme = {
   h1: {
-    fontSize: "46px",
+    fontSize: "48",
+    fontSizeMin: "32",
   },
   h2: {
-    fontSize: "32px",
+    fontSize: "38",
+    fontSizeMin: "28",
   },
   h3: {
-    fontSize: "26px",
+    fontSize: "32",
+    fontSizeMin: "24",
   },
   h4: {
-    fontSize: "22px",
+    fontSize: "24",
+    fontSizeMin: "18",
   },
   font: {
     header: 'Montserrat, sans-serif',
@@ -30,7 +34,7 @@ export const lightTheme: Theme = {
     200: "#b6d09e",
     300: "#aac590",
     400: "#9cbc7d",
-    500: "#7b985f",
+    500: "#7b985f", 
     600: "#69894a",
     700: "#445a2f",
     800: "#344425",

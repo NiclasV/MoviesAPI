@@ -1,6 +1,6 @@
 const bearerToken = process.env.REACT_APP_API_BEARER_TOKEN;
 
-const GetData = (url:string, custOptions?: {}): Promise<any> => {
+const GetData = (url:string, customOptions?: {}): Promise<any> => {
     const options = {
         method: 'GET',
         headers: {
@@ -9,7 +9,7 @@ const GetData = (url:string, custOptions?: {}): Promise<any> => {
         }
     };
 
-    var newOptions = { ...options, ...custOptions };
+    var newOptions = { ...options, ...customOptions };
 
     return fetch(url, newOptions)
     .then(res => res.json())

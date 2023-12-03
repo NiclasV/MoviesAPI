@@ -43,6 +43,10 @@ export const Container = styled(baseContainer) <ContentProps>`
     ${({ $variant }) => $variant ? contentVariants[$variant] : `
         max-width: 100%;
     `};
+
+    @media (max-width: 640px) {
+        padding: ${({ $padding }) => $padding ? $padding : "0 20px"};
+    }
 `
 interface SectionProps {
     $variant?: 'mStandard' | 'mSmall' | 'pStandard' | "pSmall" | "";

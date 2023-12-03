@@ -7,7 +7,7 @@ interface ChevronProps {
     rotate: boolean;
 }
 
-const Chevron = ({rotate}: ChevronProps) => {
+const Chevron = ({ rotate }: ChevronProps) => {
     return (
         <SvgIcon viewBox="0 0 24 24" strokeWidth="2px" fill="none" rotate={rotate ? "180deg" : ""} >
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -27,6 +27,10 @@ const DropdownLabel = styled.div`
   justify-content: space-between;
   border-radius: 7px;
 
+  @media (max-width: 560px) {
+    padding: 6px 8px 6px 10px;
+  }
+
   p {
     margin: 0;
     padding-right: 10px;
@@ -36,7 +40,11 @@ const DropdownLabel = styled.div`
     font-size: 14px;
     font-weight: 500;
     pointer-events: none;
-    color: ${(props) => props.theme.text[400]}
+    color: ${(props) => props.theme.text[400]};
+
+    @media (max-width: 560px) {
+        font-size: 13px;
+    }
   }
 
   svg {
@@ -121,7 +129,7 @@ const Dropdown = ({ label, items, onItemClick }: DropdownProps) => {
     const handleItemClick = (item: string) => {
         setSelectedItem(item);
         setIsOpen(false);
-        if(onItemClick) {
+        if (onItemClick) {
             onItemClick(item);
         }
     };
@@ -135,7 +143,7 @@ const Dropdown = ({ label, items, onItemClick }: DropdownProps) => {
 
     return (
         <DropdownWrapper ref={dropdownRef} className={isOpen ? "open" : ""}>
-            <DropdownLabel onClick={toggleDropdown}><p>{selectedItem}</p><Chevron rotate={isOpen}/></DropdownLabel>
+            <DropdownLabel onClick={toggleDropdown}><p>{selectedItem}</p><Chevron rotate={isOpen} /></DropdownLabel>
             <DropdownList open={isOpen}>
                 {items.map((item) => (
                     <DropdownItem key={item} onClick={() => handleItemClick(item)}>

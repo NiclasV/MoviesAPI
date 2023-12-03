@@ -14,6 +14,12 @@ export const Input = styled.input`
     color: ${(props) => props.theme.text[400]};
     min-height: 40px;
     
+    @media (max-width: 560px) {
+        font-size: 13px;
+        padding: 6px 8px 6px 10px;
+        min-height: 35px;
+    }
+
     &:hover {
         border: 1px solid ${(props) => props.theme.background[400]};
 

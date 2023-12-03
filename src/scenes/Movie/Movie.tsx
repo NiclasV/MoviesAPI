@@ -10,6 +10,8 @@ export const Movie = () => {
         <MovieCard/>
       </Container>
       <MovieSlider />
+
     </Section>
+
   );
 };

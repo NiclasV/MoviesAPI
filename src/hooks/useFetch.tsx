@@ -1,39 +1,52 @@
-import { useState, useEffect, useRef } from 'react';
-import GetData from '../actions/GetData';
+import { useEffect, useRef } from "react";
+import { useState } from "react";
 
-export const useFetch = (fetchUrl: string) => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
+const bearerToken = process.env.REACT_APP_API_BEARER_TOKEN;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      abortControllerRef.current?.abort();
-      abortControllerRef.current = new AbortController();
+type UseFetch<T> = [T | null, boolean];
 
-      try {
-        const result = await GetData(fetchUrl, {
-          signal: abortControllerRef.current?.signal,
-        });
-        setData(result);
-      } catch (error: any) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+export function useFetch<T>(url: string): UseFetch<T> {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const abortControllerRef = useRef<AbortController | null>(null);
 
-    if (fetchUrl) {
-      fetchData();
-    }
+    useEffect(() => {
+        async function fetchData() {
+            abortControllerRef.current?.abort();
+            abortControllerRef.current = new AbortController();
 
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [fetchUrl]);
+            await fetch(url, {
+                method: "GET",
+                signal: abortControllerRef.current?.signal,
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer ' + bearerToken
+              }
+            })
+            .then((res) => {
+                if (!res.ok) {
+                  throw new Error(`HTTP error! status: ${res.status} ${res.statusText}`);
+                }
+                return res.json();
+              })
+              .then((data) => {
+                setData(data);
+              })
+              .then(() => {
+                setLoading(false);
+              })
+              .catch((error) => {
+                if (error.name === 'AbortError') {
+                  console.log('Fetch aborted');
+                } else {
+                  console.error('Error:', error);
+                }
+              });
+        }
 
-  return { data, isLoading, error };
-};
+        fetchData();
+
+    }, [url])
+
+    return [data, loading]
+}

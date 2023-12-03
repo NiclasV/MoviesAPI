@@ -74,7 +74,7 @@ export const MoviesProvider = ({ children }: PropsWithChildren) => {
     constructFetchUrl();
 
   }, [searchParams, searchQuery])
-
+  
   useEffect(() => {
     const setHistoryUrl = () => {
       var lp = new URLSearchParams(searchParams)
